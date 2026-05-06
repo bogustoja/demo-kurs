@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MasterClass Online — Zmień swoje życie zawodowe</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --dark: #0a0a0f;
+    --dark2: #12121a;
+    --purple: #7c3aed;
+    --purple-light: #a855f7;
+    --pink: #ec4899;
+    --gold: #f59e0b;
+    --white: #ffffff;
+    --gray: #94a3b8;
+    --border: rgba(255,255,255,0.08);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--dark); color: var(--white); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 6%;
+    background: rgba(10,10,15,0.9);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 800; background: linear-gradient(135deg, var(--purple-light), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .nav-cta { background: linear-gradient(135deg, var(--purple), var(--pink)); color: var(--white); padding: 0.65rem 1.5rem; border-radius: 100px; font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: opacity 0.2s; }
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; padding: 120px 6% 80px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 800px; border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(124,58,237,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(124,58,237,0.15); border: 1px solid rgba(124,58,237,0.3);
+    color: var(--purple-light); font-size: 0.8rem; font-weight: 500;
+    padding: 0.5rem 1.2rem; border-radius: 100px; margin-bottom: 2rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    font-weight: 800; line-height: 1.05;
+    margin-bottom: 1.5rem; max-width: 900px;
+  }
+  .hero-title .gradient { background: linear-gradient(135deg, var(--purple-light), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero-subtitle { font-size: 1.1rem; color: var(--gray); max-width: 600px; line-height: 1.8; margin-bottom: 3rem; font-weight: 300; }
+  .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 4rem; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--purple), var(--pink));
+    color: var(--white); padding: 1.1rem 2.5rem;
+    border-radius: 100px; font-size: 1rem; font-weight: 600;
+    text-decoration: none; transition: all 0.25s;
+    box-shadow: 0 8px 30px rgba(124,58,237,0.4);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(124,58,237,0.5); }
+  .btn-secondary {
+    background: transparent; color: var(--white);
+    padding: 1.1rem 2.5rem; border-radius: 100px;
+    font-size: 1rem; font-weight: 500; text-decoration: none;
+    border: 1px solid var(--border); transition: all 0.2s;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.3); }
+  .hero-stats { display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap; }
+  .hero-stat { text-align: center; }
+  .hero-stat-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, var(--purple-light), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: block; }
+  .hero-stat-label { font-size: 0.8rem; color: var(--gray); margin-top: 0.25rem; }
+
+  /* SECTIONS */
+  section { padding: 6rem 6%; }
+  .section-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--purple-light); margin-bottom: 1rem; }
+  .section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; }
+  .section-title .gradient { background: linear-gradient(135deg, var(--purple-light), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .section-sub { font-size: 1rem; color: var(--gray); max-width: 520px; line-height: 1.8; font-weight: 300; }
+
+  /* CO ZYSKASZ */
+  #zyski { background: var(--dark2); }
+  .zyski-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 4rem; }
+  .zysk-card {
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+    border-radius: 16px; padding: 2rem;
+    transition: border-color 0.25s, transform 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .zysk-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, var(--purple), var(--pink)); transform: scaleX(0); transition: transform 0.25s; }
+  .zysk-card:hover { border-color: rgba(124,58,237,0.3); transform: translateY(-4px); }
+  .zysk-card:hover::before { transform: scaleX(1); }
+  .zysk-icon { font-size: 2.5rem; margin-bottom: 1.25rem; display: block; }
+  .zysk-title { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .zysk-desc { font-size: 0.9rem; color: var(--gray); line-height: 1.7; font-weight: 300; }
+
+  /* PROGRAM */
+  #program { background: var(--dark); }
+  .program-grid { display: flex; flex-direction: column; gap: 1rem; margin-top: 4rem; max-width: 800px; }
+  .program-item {
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem 2rem;
+    display: flex; gap: 1.5rem; align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+  .program-item:hover { border-color: rgba(124,58,237,0.3); }
+  .program-num { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; background: linear-gradient(135deg, var(--purple-light), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; min-width: 40px; line-height: 1; }
+  .program-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.35rem; }
+  .program-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.6; font-weight: 300; }
+  .program-tag { display: inline-block; background: rgba(124,58,237,0.15); color: var(--purple-light); font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 100px; margin-top: 0.5rem; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* PROWADZĄCY */
+  #prowadzacy { background: var(--dark2); }
+  .prowadzacy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 4rem; }
+  .prowadzacy-img { background: linear-gradient(135deg, rgba(124,58,237,0.2), rgba(236,72,153,0.2)); border-radius: 20px; height: 420px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1rem; border: 1px solid var(--border); font-size: 5rem; }
+  .prowadzacy-img span { font-size: 0.8rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.1em; }
+  .prowadzacy-content { display: flex; flex-direction: column; gap: 1.25rem; }
+  .prowadzacy-content p { font-size: 1rem; color: var(--gray); line-height: 1.9; font-weight: 300; }
+  .prowadzacy-achievement { display: flex; align-items: center; gap: 0.75rem; font-size: 0.9rem; color: var(--white); }
+  .achievement-icon { color: var(--gold); font-size: 1.1rem; }
+
+  /* OPINIE */
+  #opinie { background: var(--dark); }
+  .opinie-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 4rem; }
+  .opinia-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; }
+  .opinia-stars { color: var(--gold); font-size: 0.9rem; letter-spacing: 0.1em; margin-bottom: 1rem; }
+  .opinia-text { font-size: 0.95rem; color: rgba(255,255,255,0.8); line-height: 1.8; margin-bottom: 1.5rem; font-style: italic; }
+  .opinia-author { display: flex; align-items: center; gap: 0.75rem; }
+  .opinia-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--purple), var(--pink)); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+  .opinia-name { font-size: 0.9rem; font-weight: 600; }
+  .opinia-meta { font-size: 0.75rem; color: var(--gray); }
+
+  /* CENNIK */
+  #cennik { background: var(--dark2); }
+  .cennik-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 4rem; max-width: 800px; }
+  .cennik-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem; transition: border-color 0.25s; position: relative; overflow: hidden; }
+  .cennik-card.featured { border-color: rgba(124,58,237,0.4); background: rgba(124,58,237,0.08); }
+  .featured-badge { position: absolute; top: 1.5rem; right: 1.5rem; background: linear-gradient(135deg, var(--purple), var(--pink)); color: var(--white); font-size: 0.7rem; font-weight: 600; padding: 0.3rem 0.8rem; border-radius: 100px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .cennik-name { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); margin-bottom: 1rem; }
+  .cennik-price { font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800; margin-bottom: 0.25rem; }
+  .cennik-price span { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 300; color: var(--gray); }
+  .cennik-desc { font-size: 0.85rem; color: var(--gray); margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+  .cennik-items { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+  .cennik-item { font-size: 0.9rem; color: rgba(255,255,255,0.7); display: flex; align-items: center; gap: 0.6rem; }
+  .cennik-item::before { content: '✓'; color: var(--purple-light); font-weight: 600; }
+  .cennik-btn { display: block; text-align: center; padding: 0.9rem; border-radius: 100px; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+  .cennik-btn.primary { background: linear-gradient(135deg, var(--purple), var(--pink)); color: var(--white); }
+  .cennik-btn.outline { border: 1px solid var(--border); color: var(--white); }
+  .cennik-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  /* CTA */
+  #cta { background: var(--dark); text-align: center; }
+  .cta-inner { background: linear-gradient(135deg, rgba(124,58,237,0.2), rgba(236,72,153,0.15)); border: 1px solid rgba(124,58,237,0.3); border-radius: 24px; padding: 5rem 4rem; position: relative; overflow: hidden; }
+  .cta-inner::before { content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(ellipse, rgba(124,58,237,0.2) 0%, transparent 70%); }
+  .cta-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 800; margin-bottom: 1rem; position: relative; z-index: 1; }
+  .cta-sub { font-size: 1rem; color: var(--gray); max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.8; position: relative; z-index: 1; }
+  .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+  .cta-note { font-size: 0.8rem; color: var(--gray); margin-top: 1.5rem; position: relative; z-index: 1; }
+
+  footer { background: var(--dark2); padding: 2rem 6%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-top: 1px solid var(--border); }
+  .footer-logo { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 800; background: linear-gradient(135deg, var(--purple-light), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  footer p { font-size: 0.8rem; color: var(--gray); }
+
+  .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 5%; }
+    section { padding: 4rem 5%; }
+    .zyski-grid, .opinie-grid { grid-template-columns: 1fr; }
+    .prowadzacy-grid, .cennik-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-stats { gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">MasterClass</span>
+  <a href="#cennik" class="nav-cta">Zapisz się teraz</a>
+</nav>
+
+<section class="hero">
+  <span class="hero-badge">🔥 Ponad 2000 absolwentów</span>
+  <h1 class="hero-title">
+    Opanuj umiejętności,<br>
+    które <span class="gradient">zmienią Twoją karierę</span>
+  </h1>
+  <p class="hero-subtitle">Intensywny kurs online dla ambitnych profesjonalistów. Praktyczna wiedza, mentoring ekspertów i certyfikat potwierdzający Twoje kompetencje.</p>
+  <div class="hero-actions">
+    <a href="#cennik" class="btn-primary">🚀 Zacznij już dziś</a>
+    <a href="#program" class="btn-secondary">▶ Zobacz program</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="hero-stat-num">2 400+</span><span class="hero-stat-label">Absolwentów</span></div>
+    <div class="hero-stat"><span class="hero-stat-num">94%</span><span class="hero-stat-label">Satysfakcja</span></div>
+    <div class="hero-stat"><span class="hero-stat-num">12 tyg.</span><span class="hero-stat-label">Czas trwania</span></div>
+    <div class="hero-stat"><span class="hero-stat-num">★ 4.9</span><span class="hero-stat-label">Ocena kursu</span></div>
+  </div>
+</section>
+
+<section id="zyski">
+  <p class="section-label fade-up">Co zyskasz</p>
+  <h2 class="section-title fade-up">Wszystko czego potrzebujesz,<br>żeby <span class="gradient">wyróżnić się</span></h2>
+  <div class="zyski-grid">
+    <div class="zysk-card fade-up"><span class="zysk-icon">🎯</span><h3 class="zysk-title">Praktyczna wiedza</h3><p class="zysk-desc">Zero teorii bez pokrycia. Każda lekcja zawiera ćwiczenia oparte na realnych projektach z rynku.</p></div>
+    <div class="zysk-card fade-up"><span class="zysk-icon">🧠</span><h3 class="zysk-title">Mentoring 1:1</h3><p class="zysk-desc">Cotygodniowe sesje z mentorem, który przeszedł tę samą drogę i wie, gdzie możesz utknąć.</p></div>
+    <div class="zysk-card fade-up"><span class="zysk-icon">🏆</span><h3 class="zysk-title">Certyfikat</h3><p class="zysk-desc">Po ukończeniu kursu otrzymasz certyfikat uznawany przez pracodawców w Polsce i za granicą.</p></div>
+    <div class="zysk-card fade-up"><span class="zysk-icon">👥</span><h3 class="zysk-title">Społeczność</h3><p class="zysk-desc">Dołącz do sieci 2400+ absolwentów. Networking, polecenia pracy i wzajemne wsparcie.</p></div>
+    <div class="zysk-card fade-up"><span class="zysk-icon">♾️</span><h3 class="zysk-title">Dożywotni dostęp</h3><p class="zysk-desc">Materiały kursu dostępne bez limitu czasu. Aktualizacje gratis gdy zmienia się rynek.</p></div>
+    <div class="zysk-card fade-up"><span class="zysk-icon">💼</span><h3 class="zysk-title">Wsparcie kariery</h3><p class="zysk-desc">Pomoc w przygotowaniu CV, portfolio i rozmowach kwalifikacyjnych z naszymi ekspertami.</p></div>
+  </div>
+</section>
+
+<section id="program">
+  <p class="section-label fade-up">Program kursu</p>
+  <h2 class="section-title fade-up">12 tygodni do <span class="gradient">mistrzostwa</span></h2>
+  <p class="section-sub fade-up">Starannie zaprojektowana ścieżka nauki — od podstaw do zaawansowanych technik.</p>
+  <div class="program-grid">
+    <div class="program-item fade-up"><span class="program-num">01</span><div><p class="program-title">Fundamenty i mindset</p><p class="program-desc">Zbuduj solidne podstawy i odpowiednie nastawienie. Zrozum jak myślą eksperci w tej dziedzinie.</p><span class="program-tag">Tydzień 1–2</span></div></div>
+    <div class="program-item fade-up"><span class="program-num">02</span><div><p class="program-title">Kluczowe narzędzia i techniki</p><p class="program-desc">Opanuj narzędzia używane przez profesjonalistów. Praktyczne ćwiczenia na realnych przykładach.</p><span class="program-tag">Tydzień 3–5</span></div></div>
+    <div class="program-item fade-up"><span class="program-num">03</span><div><p class="program-title">Projekty i case studies</p><p class="program-desc">Zastosuj wiedzę w praktyce. Zbuduj portfolio projektów, które pokażesz pracodawcom.</p><span class="program-tag">Tydzień 6–8</span></div></div>
+    <div class="program-item fade-up"><span class="program-num">04</span><div><p class="program-title">Zaawansowane strategie</p><p class="program-desc">Techniki używane przez top 1% specjalistów. Optymalizacja, skalowanie i automatyzacja.</p><span class="program-tag">Tydzień 9–10</span></div></div>
+    <div class="program-item fade-up"><span class="program-num">05</span><div><p class="program-title">Projekt końcowy i certyfikacja</p><p class="program-desc">Stwórz kompleksowy projekt końcowy, zdobądź certyfikat i zaprezentuj się społeczności.</p><span class="program-tag">Tydzień 11–12</span></div></div>
+  </div>
+</section>
+
+<section id="prowadzacy">
+  <p class="section-label fade-up">Prowadzący</p>
+  <h2 class="section-title fade-up">Ucz się od <span class="gradient">eksperta</span></h2>
+  <div class="prowadzacy-grid">
+    <div class="prowadzacy-img fade-up">👨‍💻<span>Twoje zdjęcie tutaj</span></div>
+    <div class="prowadzacy-content fade-up">
+      <p>Jestem praktykiem z 10-letnim doświadczeniem w branży. Pracowałem z setkami firm — od startupów po korporacje — i wiem dokładnie co działa, a co to tylko teoria.</p>
+      <p>Mój kurs to esencja tego, czego nauczyłem się przez dekadę prób i błędów. Nie znajdziesz tu zbędnego wypełniacza — tylko to, co realnie zmienia wyniki.</p>
+      <div class="prowadzacy-achievement"><span class="achievement-icon">🏆</span> 10 lat doświadczenia w branży</div>
+      <div class="prowadzacy-achievement"><span class="achievement-icon">🎓</span> 2400+ przeszkolonych profesjonalistów</div>
+      <div class="prowadzacy-achievement"><span class="achievement-icon">📚</span> Autor 3 bestsellerów branżowych</div>
+      <div class="prowadzacy-achievement"><span class="achievement-icon">🌍</span> Prelegent na konferencjach w 15 krajach</div>
+    </div>
+  </div>
+</section>
+
+<section id="opinie">
+  <p class="section-label fade-up">Opinie absolwentów</p>
+  <h2 class="section-title fade-up">Co mówią <span class="gradient">uczestnicy</span></h2>
+  <div class="opinie-grid">
+    <div class="opinia-card fade-up"><p class="opinia-stars">★★★★★</p><p class="opinia-text">"Ten kurs zmienił moją karierę dosłownie z dnia na dzień. Trzy tygodnie po ukończeniu dostałem ofertę pracy z 40% podwyżką."</p><div class="opinia-author"><div class="opinia-avatar">👨</div><div><p class="opinia-name">Marcin K.</p><p class="opinia-meta">Junior → Mid Developer · 6 miesięcy temu</p></div></div></div>
+    <div class="opinia-card fade-up"><p class="opinia-stars">★★★★★</p><p class="opinia-text">"Próbowałam wielu kursów online. Ten jest inny — konkretny, bez lania wody. Mentor był dostępny kiedy utknęłam i zawsze pomógł."</p><div class="opinia-author"><div class="opinia-avatar">👩</div><div><p class="opinia-name">Anna W.</p><p class="opinia-meta">Zmiana branży · 4 miesiące temu</p></div></div></div>
+    <div class="opinia-card fade-up"><p class="opinia-stars">★★★★★</p><p class="opinia-text">"Najlepsza inwestycja w siebie jaką zrobiłem. Zwrot z inwestycji w pierwszym miesiącu po kursie był czterokrotny."</p><div class="opinia-author"><div class="opinia-avatar">👨</div><div><p class="opinia-name">Piotr M.</p><p class="opinia-meta">Freelancer · 2 miesiące temu</p></div></div></div>
+  </div>
+</section>
+
+<section id="cennik">
+  <p class="section-label fade-up">Cennik</p>
+  <h2 class="section-title fade-up">Wybierz swój <span class="gradient">plan</span></h2>
+  <div class="cennik-grid">
+    <div class="cennik-card fade-up">
+      <p class="cennik-name">Standard</p>
+      <p class="cennik-price">997<span> zł</span></p>
+      <p class="cennik-desc">Idealne na start — pełny dostęp do materiałów</p>
+      <ul class="cennik-items">
+        <li class="cennik-item">Dostęp do wszystkich lekcji</li>
+        <li class="cennik-item">Materiały do pobrania</li>
+        <li class="cennik-item">Dostęp do społeczności</li>
+        <li class="cennik-item">Certyfikat ukończenia</li>
+        <li class="cennik-item">Dożywotni dostęp</li>
+      </ul>
+      <a href="#" class="cennik-btn outline">Wybierz plan</a>
+    </div>
+    <div class="cennik-card featured fade-up">
+      <span class="featured-badge">Najpopularniejszy</span>
+      <p class="cennik-name">Premium</p>
+      <p class="cennik-price">1 997<span> zł</span></p>
+      <p class="cennik-desc">Pełne wsparcie i szybsza droga do celu</p>
+      <ul class="cennik-items">
+        <li class="cennik-item">Wszystko z planu Standard</li>
+        <li class="cennik-item">8 sesji mentoringu 1:1</li>
+        <li class="cennik-item">Przegląd CV i portfolio</li>
+        <li class="cennik-item">Wsparcie w szukaniu pracy</li>
+        <li class="cennik-item">Priorytetowe wsparcie</li>
+        <li class="cennik-item">Gwarancja zwrotu 30 dni</li>
+      </ul>
+      <a href="#" class="cennik-btn primary">🚀 Zacznij teraz</a>
+    </div>
+  </div>
+</section>
+
+<section id="cta">
+  <div class="cta-inner fade-up">
+    <h2 class="cta-title">Gotowy na zmianę?</h2>
+    <p class="cta-sub">Dołącz do 2400+ absolwentów którzy już zmienili swoje kariery. Następna edycja startuje wkrótce.</p>
+    <div class="cta-actions">
+      <a href="#cennik" class="btn-primary">🚀 Zapisz się teraz</a>
+    </div>
+    <p class="cta-note">✓ Gwarancja zwrotu 30 dni &nbsp;·&nbsp; ✓ Bez ukrytych opłat &nbsp;·&nbsp; ✓ Zacznij już dziś</p>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">MasterClass Online</span>
+  <p>© 2025 MasterClass. Wszelkie prawa zastrzeżone.</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 60);
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
